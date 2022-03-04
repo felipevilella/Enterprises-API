@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  database: 
+    image: postgres
+    container_name: database_enterprises
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=enterprises
+      - POSTGRES_PASSWORD=enterprises
+      - POSTGRES_DB=database_enterprises
+    volumes:
+      - pgdata:/data/postgres
+
+  mongodb_container:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: enterprises
+      MONGO_INITDB_ROOT_PASSWORD: enterprises
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:
+  pgdata:
+    driver: local
