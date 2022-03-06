@@ -58,6 +58,12 @@ export class createTableUsers1646417675093 implements MigrationInterface {
             type: 'uuid',
             isNullable: false,
           },
+
+          {
+            name: 'active',
+            type: 'boolean',
+            default: true,
+          },
           {
             name: 'created_at',
             type: 'timestamp',
