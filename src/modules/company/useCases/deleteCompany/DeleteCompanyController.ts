@@ -6,7 +6,7 @@ import { DeleteCompanyUseCase } from './DeleteCompanyUseCase';
 class DeleteCompanyController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.user;
-    const { company_id } = request.body;
+    const { company_id } = request.query;
 
     const deleteCompanyUseCase = container.resolve(DeleteCompanyUseCase);
 

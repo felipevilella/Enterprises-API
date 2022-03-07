@@ -8,10 +8,11 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
+import { Company } from './Company';
 import { TypeOffice } from './TypeOffice';
 
-@Entity('collaborator')
-class Company {
+@Entity('collaborators')
+class Collaborator {
   @PrimaryColumn()
   id: string;
 
@@ -38,6 +39,9 @@ class Company {
   @ManyToOne(() => Company)
   @JoinColumn({ name: 'company_id' })
   company: Company;
+
+  @Column()
+  active: boolean;
 }
 
-export { Company };
+export { Collaborator };

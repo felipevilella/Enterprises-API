@@ -5,6 +5,7 @@ import {
   ICompanyDTO,
   ICreateCompanyDTO,
 } from '@modules/company/dtos/ICompanyDTO';
+import { CollaboratorRepositoryInMemory } from '@modules/company/repositories/in-memory/CollaboratorRepositoryInMemory';
 import { CompanyRepositoryInMemory } from '@modules/company/repositories/in-memory/CompanyRepositoryInMemory';
 
 import { AppError } from '@shared/errors/AppError';
@@ -17,17 +18,20 @@ let companyRepositoryInMemory: CompanyRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
 let createCompanyUseCase: CreateCompanyUseCase;
 let listCompanyUseCase: ListCompanyUseCase;
+let collaboratorRepositoryInMemory: CollaboratorRepositoryInMemory;
 
 describe('List companny', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory();
     companyRepositoryInMemory = new CompanyRepositoryInMemory();
+    collaboratorRepositoryInMemory = new CollaboratorRepositoryInMemory();
 
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory);
 
     createCompanyUseCase = new CreateCompanyUseCase(
       userRepositoryInMemory,
       companyRepositoryInMemory,
+      collaboratorRepositoryInMemory,
     );
 
     listCompanyUseCase = new ListCompanyUseCase(

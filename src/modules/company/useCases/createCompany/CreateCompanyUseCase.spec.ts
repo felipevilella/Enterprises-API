@@ -2,6 +2,7 @@ import { ICreateUserDTO } from '@modules/accounts/dtos/IUserDTO';
 import { UserRepositoryInMemory } from '@modules/accounts/repositories/in-memory/UserRepositoryInMemory';
 import { CreateUserUseCase } from '@modules/accounts/useCases/createUsers/CreateUserUseCase';
 import { ICreateCompanyDTO } from '@modules/company/dtos/ICompanyDTO';
+import { CollaboratorRepositoryInMemory } from '@modules/company/repositories/in-memory/CollaboratorRepositoryInMemory';
 import { CompanyRepositoryInMemory } from '@modules/company/repositories/in-memory/CompanyRepositoryInMemory';
 
 import { AppError } from '@shared/errors/AppError';
@@ -10,6 +11,7 @@ import { CreateCompanyUseCase } from './CreateCompanyUseCase';
 
 let userRepositoryInMemory: UserRepositoryInMemory;
 let companyRepositoryInMemory: CompanyRepositoryInMemory;
+let collaboratorRepositoryInMemory: CollaboratorRepositoryInMemory;
 let createUserUseCase: CreateUserUseCase;
 let createCompanyUseCase: CreateCompanyUseCase;
 
@@ -17,11 +19,13 @@ describe('Create companny', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory();
     companyRepositoryInMemory = new CompanyRepositoryInMemory();
+    collaboratorRepositoryInMemory = new CollaboratorRepositoryInMemory();
 
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory);
     createCompanyUseCase = new CreateCompanyUseCase(
       userRepositoryInMemory,
       companyRepositoryInMemory,
+      collaboratorRepositoryInMemory,
     );
   });
 

@@ -1,15 +1,20 @@
 import { IUpdateUserDTO } from '@modules/accounts/dtos/IUserDTO';
 import { User } from '@modules/accounts/infra/typeorm/entities/User';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { ICollaboratorRepository } from '@modules/company/repositories/ICollaboratorRepository';
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/errors/AppError';
+import { UserMap } from '@modules/accounts/mapper/UserMap';
 
 @injectable()
 class UpdateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('CollaboratorRepository')
+    private collaboratorRepository: ICollaboratorRepository,
   ) {}
 
   async execute({
@@ -28,13 +33,32 @@ class UpdateUserUseCase {
     });
     const userUpdate = await this.usersRepository.findById({ id });
 
-    if (
+    const userActionCollaborator = await this.collaboratorRepository.findByUser(
+      { user_id: user_id_action },
+    );
+
+    const userEditCollaborator = await this.collaboratorRepository.findByUser({
+      user_id: id,
+    });
+
+    if (userActionCollaborator && userEditCollaborator) {
+      if (
+        userActionCollaborator.type_office_id ===
+          'e60c3074-441a-4ced-b246-9815b10c07c7' ||
+        userActionCollaborator.company_id !== userEditCollaborator.company_id
+      ) {
+        throw new AppError(
+          'This employee does not have permission to perform a list contributor0',
+          400,
+        );
+      }
+    } else if (
       userEdit.type_user_id !== 'c1e1a7de-b446-45d2-bb5b-3d067a7705d2' &&
-      user_id_action !== id
+      user_id_action !== userUpdate.id
     ) {
       throw new AppError(
         'This user does not have permission to perform a profile update',
-        401,
+        400,
       );
     }
 
@@ -49,7 +73,7 @@ class UpdateUserUseCase {
       uf_residence: uf_residence || userUpdate.uf_residence,
     });
 
-    return user;
+    return UserMap.toDTO(user);
   }
 }
 

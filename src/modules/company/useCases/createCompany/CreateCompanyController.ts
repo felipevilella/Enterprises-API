@@ -3,7 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateCompanyUseCase } from './CreateCompanyUseCase';
 
-class CreateUserController {
+class CreateCompanyController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.user;
     const { name, occupation_area, description, founded_in, email } =
@@ -23,4 +23,4 @@ class CreateUserController {
   }
 }
 
-export { CreateUserController };
+export { CreateCompanyController };

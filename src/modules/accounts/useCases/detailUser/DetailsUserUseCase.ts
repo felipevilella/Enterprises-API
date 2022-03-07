@@ -4,6 +4,7 @@ import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepositor
 import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/errors/AppError';
+import { UserMap } from '@modules/accounts/mapper/UserMap';
 
 @injectable()
 class DetailsUserUseCase {
@@ -31,7 +32,7 @@ class DetailsUserUseCase {
       id,
     });
 
-    return user;
+    return UserMap.toDTO(user);
   }
 }
 

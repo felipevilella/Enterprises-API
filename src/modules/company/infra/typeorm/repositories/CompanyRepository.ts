@@ -32,7 +32,13 @@ class CompanyRepository implements ICompanysRepository {
 
     await this.repository.save(company);
 
-    return company;
+    const companyCreated = getConnection()
+      .getRepository(Company)
+      .createQueryBuilder('companys')
+      .orderBy('created_at', 'DESC')
+      .getOne();
+
+    return companyCreated;
   }
 
   async findById({ id }: ICompanyDTO): Promise<Company> {
@@ -52,19 +58,37 @@ class CompanyRepository implements ICompanysRepository {
     founded_in,
     name_director,
   }: ICompanyDTO): Promise<Company[]> {
-    const companys = await getRepository(Company)
+    const companys = getRepository(Company)
       .createQueryBuilder('companys')
-      .orWhere('companys.name = :name', { name })
-      .where('companys.occupation_area = :occupation_area', {
-        occupation_area,
-      })
-      .orWhere('companys.description = :description', { description })
-      .orWhere('companys.founded_in = :founded_in', { founded_in })
-      .orWhere('companys.name_director = :name_director', { name_director })
-      .andWhere('companys.active = :active', { active: true })
-      .getMany();
+      .andWhere('companys.active = :active', { active: true });
 
-    return companys;
+    if (occupation_area) {
+      companys.orWhere('companys.occupation_area = :occupation_area', {
+        occupation_area,
+      });
+    }
+
+    if (occupation_area) {
+      companys.orWhere('companys.description = :description', { description });
+    }
+
+    if (founded_in) {
+      companys.orWhere('companys.founded_in = :founded_in', { founded_in });
+    }
+
+    if (founded_in) {
+      companys.orWhere('companys.name_director = :name_director', {
+        name_director,
+      });
+    }
+
+    if (founded_in) {
+      companys.orWhere('companys.name = :name', { name });
+    }
+
+    const result = await companys.getMany();
+
+    return result;
   }
 
   async update(data: IUpdateCompanyDTO): Promise<Company> {

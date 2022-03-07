@@ -6,7 +6,7 @@ import { DetailsCompanyUseCase } from './DetailsCompanyUseCase';
 class DetailsCompanyController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.user;
-    const { company_id } = request.body;
+    const { company_id } = request.query;
 
     const detailsCompanyUseCase = container.resolve(DetailsCompanyUseCase);
 

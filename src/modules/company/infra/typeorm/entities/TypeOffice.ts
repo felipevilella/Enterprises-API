@@ -7,9 +7,6 @@ class TypeOffice {
 
   @Column()
   name: string;
-
-  @CreateDateColumn()
-  created_at: Date;
 }
 
 export { TypeOffice };

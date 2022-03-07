@@ -24,7 +24,7 @@ class CreateUserController {
       email,
       password,
       type_schooling_id,
-      type_user_id,
+      type_user_id: 'c1e1a7de-b446-45d2-bb5b-3d067a7705d5',
       uf_residence,
     });
 

@@ -1,7 +1,6 @@
-import { User } from '@modules/accounts/infra/typeorm/entities/User';
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity('company')
+@Entity('companys')
 class Company {
   @PrimaryColumn()
   id: string;

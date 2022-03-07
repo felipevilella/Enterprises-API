@@ -33,19 +33,13 @@ class ListCompanyUseCase {
 
     if (userAction.type_user_id !== 'c1e1a7de-b446-45d2-bb5b-3d067a7705d2') {
       throw new AppError(
-        'This user does not have permission to perform a create company',
-        401,
+        'This user does not have permission to perform a list company',
+        400,
       );
     }
 
-    if (!userDirector) {
-      throw new AppError('email not already exists', 401);
-    }
-
-    const compannyEdit = await this.companyRepository.findById({ id });
-
-    if (!compannyEdit) {
-      throw new AppError('company not already exists', 401);
+    if (!userDirector && email) {
+      throw new AppError('email not already exists', 400);
     }
 
     const companny = await this.companyRepository.list({
@@ -53,7 +47,7 @@ class ListCompanyUseCase {
       occupation_area,
       description,
       founded_in,
-      name_director: userDirector.full_name,
+      name_director: userDirector ? userDirector.full_name : '',
     });
 
     return companny;

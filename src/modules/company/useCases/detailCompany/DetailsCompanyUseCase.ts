@@ -23,8 +23,8 @@ class DetailsCompanyUseCase {
 
     if (userAction.type_user_id !== 'c1e1a7de-b446-45d2-bb5b-3d067a7705d2') {
       throw new AppError(
-        'This user does not have permission to perform a create company',
-        401,
+        'This user does not have permission to perform a details company',
+        400,
       );
     }
 

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('type_users')
 class TypeUsers {
@@ -7,9 +7,6 @@ class TypeUsers {
 
   @Column()
   name: string;
-
-  @CreateDateColumn()
-  created_at: Date;
 }
 
 export { TypeUsers };

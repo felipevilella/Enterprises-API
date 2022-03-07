@@ -36,6 +36,12 @@ export class createTableCollaborator1646603820916
             isNullable: false,
           },
           {
+            name: 'active',
+            type: 'boolean',
+            isNullable: false,
+            default: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -45,7 +51,7 @@ export class createTableCollaborator1646603820916
     );
 
     await queryRunner.createForeignKey(
-      'collaborator',
+      'collaborators',
       new TableForeignKey({
         name: 'fk_user_collaborator',
         columnNames: ['user_id'],
@@ -56,7 +62,7 @@ export class createTableCollaborator1646603820916
     );
 
     await queryRunner.createForeignKey(
-      'collaborator',
+      'collaborators',
       new TableForeignKey({
         name: 'fk_type_office_collaborator',
         columnNames: ['type_office_id'],
@@ -67,7 +73,7 @@ export class createTableCollaborator1646603820916
     );
 
     await queryRunner.createForeignKey(
-      'collaborator',
+      'collaborators',
       new TableForeignKey({
         name: 'fk_companny_type_collaborator',
         columnNames: ['company_id'],
@@ -79,7 +85,15 @@ export class createTableCollaborator1646603820916
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('company', 'fk_director_type_company');
-    await queryRunner.dropTable('company');
+    await queryRunner.dropForeignKey('collaborators', 'fk_user_collaborator');
+    await queryRunner.dropForeignKey(
+      'collaborators',
+      'fk_type_office_collaborator',
+    );
+    await queryRunner.dropForeignKey(
+      'collaborators',
+      'fk_companny_type_collaborator',
+    );
+    await queryRunner.dropTable('collaborators');
   }
 }
