@@ -55,8 +55,12 @@ class CollaboratorRepositoryInMemory implements ICollaboratorRepository {
     return this.collaborators[findIndex];
   }
 
-  findByUser({ user_id }: IFinbByUserCollaboratorDTO): Promise<Collaborator> {
-    throw new Error('Method not implemented.');
+  async findByUser({
+    user_id,
+  }: IFinbByUserCollaboratorDTO): Promise<Collaborator> {
+    return this.collaborators.find(
+      collaborator => collaborator.user_id === user_id,
+    );
   }
 }
 
