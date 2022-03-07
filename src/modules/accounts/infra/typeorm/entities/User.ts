@@ -7,7 +7,6 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-import { TypeSchooling } from './TypeSchooling';
 import { TypeUsers } from './TypeUsers';
 
 @Entity('users')
@@ -46,12 +45,8 @@ class User {
   created_at: Date;
 
   @ManyToOne(() => TypeUsers)
-  @JoinColumn({ name: 'type_users_id' })
+  @JoinColumn({ name: 'type_user_id' })
   typeUsers: TypeUsers;
-
-  @ManyToOne(() => TypeSchooling)
-  @JoinColumn({ name: 'type_schooling_id' })
-  profession: TypeSchooling;
 }
 
 export { User };

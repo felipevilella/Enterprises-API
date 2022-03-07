@@ -18,6 +18,1044 @@
       }
     },
     "paths": {
-
+      "/sessions": {
+        "post": {
+          "tags": ["session"],
+          "summary": "Create a session",
+           "description": "Create a new sessions",
+           "requestBody": {
+             "content": {
+               "application/json": {
+                 "schema": {
+                   "type": "object",
+                   "properties": {
+                     "email": {
+                       "type": "string"
+                     },
+                     "password": {
+                        "type": "string"
+                     }
+                   },
+                   "example": {
+                    "email": "administrador@enterprises.com.br",
+                    "password": "@teste123"
+                   }
+                 }
+               }
+             }
+           },
+           "responses": {
+             "201": {
+               "description": "Created",
+               "content": {
+                "application/json": {
+                  "type": "string[]",
+                  "example": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDY2NTcyNTQsImV4cCI6MTY0NjY2NDQ1NCwic3ViIjoiYmJjZTg1OGEtMGEyOS00ZDAzLThmYWYtMmEzMWViNGEzMGI5In0.0xMj3icZgGxGYLBvXPvx8yOKaizW58Cil6ByiXPdsPE",
+                    "user": {
+                      "id": "bbce858a-0a29-4d03-8faf-2a31eb4a30b9",
+                      "name": "administrador",
+                      "email": "administrador@enterprises.com.br"
+                    }
+                  }
+                }
+              }
+             },
+             "401": {
+               "description": "Email or password incorrect"
+             }
+           }
+        }
+      },
+      
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a user",
+         "description": "Create a new user",
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "object",
+                 "properties": {
+                   "email": {
+                     "type": "string"
+                   },
+                   "full_name": {
+                     "type": "string"
+                   },
+                   "password": {
+                      "type": "string"
+                   },
+                   "birth_date": {
+                    "type": "string"
+                  },
+                  "city_residence,": {
+                      "type": "string"
+                  },
+                  "type_schooling_id": {
+                    "type": "string"
+                   },
+                   "uf_residence": {
+                    "type": "string"
+                   }
+                 },
+                 "example": {
+                  "full_name": "Josefina Cardoso Pereira",
+                  "birth_date": "1996/04/12",
+                  "city_residence": "Belo Horizonte",
+                  "email": "josefina@hotmail.com",
+                  "password": "@teste123",
+                  "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                  "uf_residence": "MG"
+                 }
+               }
+             }
+           }
+         },
+         "responses": {
+           "201": {
+             "description": "Created",
+             "security": [
+              { "bearerAuth": []}
+             ],
+             "content": {
+              "application/json": {
+                "type": "string[]",
+                "example": {
+                  "full_name": "Josefina Cardoso Pereira",
+                  "email": "jose@hotmail.com",
+                  "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                  "birth_date": "1996/04/12",
+                  "uf_residence": "MG",
+                  "city_residence": "Belo Horizonte",
+                  "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6"
+                }
+              }
+             }
+           },
+           "401": {
+             "description": "User Already exists"
+           }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update a user",
+         "description": "Update a user",
+         "security": [
+          { "bearerAuth": []}
+         ],
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "object",
+                 "properties": {
+                  "user_id": {
+                    "type": "string"
+                  }, 
+                  "email": {
+                     "type": "string"
+                   },
+                   "full_name": {
+                     "type": "string"
+                   },
+                   "password": {
+                      "type": "string"
+                   },
+                   "birth_date": {
+                    "type": "string"
+                  },
+                  "city_residence,": {
+                      "type": "string"
+                  },
+                  "type_schooling_id": {
+                    "type": "string"
+                   },
+                   "uf_residence": {
+                    "type": "string"
+                   }
+                 },
+                 "example": {
+                    "user_id": "af71211d-9997-445d-81e4-43cbde8e7f4c",
+                    "full_name": "Josefina Cardoso Perreira"
+                 }
+               }
+             }
+           }
+         },
+         "responses": {
+           "202": {
+             "description": "Created",
+             "security": [
+              { "bearerAuth": []}
+             ],
+             "content": {
+              "application/json": {
+                "type": "string[]",
+                "example": {
+                  "user_id": "af71211d-9997-445d-81e4-43cbde8e7f4c", 
+                  "full_name": "Josefina Cardoso Perreira",
+                  "city_residence": "Belo Horizonte"
+                }
+              }
+             }
+           },
+           "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a profile update"
+                  }
+                }
+              }
+            }
+          }
+        } 
+      },
+      "get": {
+        "tags": ["Users"],
+        "summary": "User details",
+        "description": "User details",
+        "security": [
+          { "bearerAuth": []}
+         ],
+         "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "user id (optional)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "id": "af71211d-9997-445d-81e4-43cbde8e7f4c",
+                    "full_name": "Josefina Cardoso Perreira",
+                    "email": "josefina@hotmail.com",
+                    "birth_date": "1996-04-12T03:00:00.000Z",
+                    "uf_residence": "MG",
+                    "city_residence": "Belo Horizonte",
+                    "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                    "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                    "active": true,
+                    "created_at": "2022-03-07T16:04:15.286Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a profile list"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete users",
+        "description": "Delete users",
+        "security": [
+          { "bearerAuth": []}
+         ],
+         "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "user id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "id": "ed72954f-37b5-463c-8f54-01c31b939bd3",
+                    "full_name": "julia Cardoso Pereira",
+                    "email": "julia@hotmail.com",
+                    "birth_date": "1996-04-12T03:00:00.000Z",
+                    "uf_residence": "MG",
+                    "city_residence": "Belo Horizonte",
+                    "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                    "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                    "active": false,
+                    "created_at": "2022-03-07T16:25:08.095Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a profile delete"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }   
+    },
+    "/users/list": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "List user",
+        "description": "List user",
+        "security": [
+          { "bearerAuth": []}
+         ],
+        "responses": {
+          "200": {
+            "description": "User listed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": [
+                    {
+                      "id": "bbce858a-0a29-4d03-8faf-2a31eb4a30b9",
+                      "full_name": "administrador",
+                      "email": "administrador@enterprises.com.br",
+                      "birth_date": "2022-03-04T03:00:00.000Z",
+                      "uf_residence": "MG",
+                      "city_residence": "Belo Horizonte",
+                      "type_schooling_id": null,
+                      "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d2",
+                      "active": true,
+                      "created_at": "2022-03-07T14:50:34.662Z"
+                    },
+                    {
+                      "id": "ed72954f-37b5-463c-8f54-01c31b939bd3",
+                      "full_name": "julia Cardoso Pereira",
+                      "email": "julia@hotmail.com",
+                      "birth_date": "1996-04-12T03:00:00.000Z",
+                      "uf_residence": "MG",
+                      "city_residence": "Belo Horizonte",
+                      "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                      "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                      "active": true,
+                      "created_at": "2022-03-07T16:25:08.095Z"
+                    },
+                    {
+                      "id": "af71211d-9997-445d-81e4-43cbde8e7f4c",
+                      "full_name": "Josefina Cardoso Perreira",
+                      "email": "josefina@hotmail.com",
+                      "birth_date": "1996-04-12T03:00:00.000Z",
+                      "uf_residence": "MG",
+                      "city_residence": "Belo Horizonte",
+                      "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                      "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                      "active": true,
+                      "created_at": "2022-03-07T16:04:15.286Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a profile list"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/listTypeUser": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "List a type users",
+         "description": "List a type users",
+         "responses": {
+           "200": {
+             "description": "List Users",
+             "content": {
+              "application/json": {
+                "type": "string",
+                "example": [
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d2",
+                    "name": "Administrador"
+                  },
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                    "name": "Básico"
+                  }
+                ]
+              }
+            }
+           }
+        }
+      }
+    },
+    "/users/listTypeSchooling": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "List a type Schooling",
+         "description": "List a type Schooling",
+         "responses": {
+           "200": {
+             "description": "List Schooling",
+             "content": {
+              "application/json": {
+                "type": "string",
+                "example": [
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e2",
+                    "name": "Infantil"
+                  },
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e3",
+                    "name": "Fundamental"
+                  },
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e4",
+                    "name": "Médio"
+                  },
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e5",
+                    "name": "Superior"
+                  },
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                    "name": "Pós-graduação"
+                  },
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e7",
+                    "name": "Mestrado"
+                  },
+                  {
+                    "id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e8",
+                    "name": "Doutorado"
+                  }
+                ]
+              }
+            }
+           }
+        }
+      }
+    },
+    "/company": {
+      "post": {
+        "tags": ["Company"],
+        "summary": "Create a user",
+         "description": "Create a new user",
+         "security": [
+          { "bearerAuth": []}
+         ],
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "object",
+                 "properties": {
+                   "name": {
+                     "type": "string"
+                   },
+                   "occupation_area": {
+                     "type": "string"
+                   },
+                   "description": {
+                      "type": "string"
+                   },
+                   "founded_in": {
+                    "type": "string"
+                  },
+                  "email,": {
+                      "type": "string"
+                  }
+                 },
+                 "example": {
+                  "name": "IOASYS DESENVOLVIMENTO DE SOFTWARE LTDA",
+                  "occupation_area": "Tecnologia",
+                  "description":
+                    "Somos especialistas em criar soluções únicas para empresas ousadas. Digitalmente, mas sempre com alma.",
+                  "founded_in": "2018/10/08",
+                  "email": "julia@hotmail.com"
+                 }
+               }
+             }
+           }
+         },
+         "responses": {
+           "201": {
+             "description": "Created",
+             "security": [
+              { "bearerAuth": []}
+             ],
+             "content": {
+              "application/json": {
+                "type": "string[]",
+                "example": {
+                  "id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                  "name": "IOASYS DESENVOLVIMENTO DE SOFTWARE LTDA",
+                  "occupation_area": "Tecnologia",
+                  "description": "Somos especialistas em criar soluções únicas para empresas ousadas. Digitalmente, mas sempre com alma.",
+                  "name_director": "julia Cardoso Pereira",
+                  "founded_in": "2018-10-08T03:00:00.000Z",
+                  "active": true,
+                  "created_at": "2022-03-07T18:44:02.554Z"
+                }
+              }
+             }
+           },
+           "401": {
+             "description": "This user does not have permission to perform a create company"
+           }
+        }
+      },
+      "put": {
+        "tags": ["Company"],
+        "summary": "Update a user",
+         "description": "Update a user",
+         "security": [
+          { "bearerAuth": []}
+         ],
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "object",
+                 "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "occupation_area": {
+                    "type": "string"
+                  },
+                  "description": {
+                     "type": "string"
+                  },
+                  "founded_in": {
+                   "type": "string"
+                 },
+                 "email,": {
+                     "type": "string"
+                 }
+                 },
+                 "example": {
+                  "company_id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                  "name": "IOASYS DESENVOLVIMENTO DE SOFTWARE",
+                  "email": "julia@hotmail.com"
+                 }
+               }
+             }
+           }
+         },
+         "responses": {
+           "202": {
+             "description": "Update",
+             "security": [
+              { "bearerAuth": []}
+             ],
+             "content": {
+              "application/json": {
+                "type": "string[]",
+                "example": {
+                  "company_id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                  "name": "IOASYS DESENVOLVIMENTO DE SOFTWARE",
+                  "email": "julia@hotmail.com" 
+                }
+              }
+             }
+           },
+           "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a company update"
+                  }
+                }
+              }
+            }
+          }
+        } 
+      },
+      "get": {
+        "tags": ["Company"],
+        "summary": "Company details",
+        "description": "Company details",
+        "security": [
+          { "bearerAuth": []}
+         ],
+         "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "company id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                    "name": "IOASYS DESENVOLVIMENTO DE SOFTWARE",
+                    "occupation_area": "Tecnologia",
+                    "description": "Somos especialistas em criar soluções únicas para empresas ousadas. Digitalmente, mas sempre com alma.",
+                    "name_director": "julia Cardoso Pereira",
+                    "founded_in": "2018-10-08T03:00:00.000Z",
+                    "active": true,
+                    "created_at": "2022-03-07T18:44:02.554Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a details company"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Company"],
+        "summary": "Delete Company",
+        "description": "Delete Company",
+        "security": [
+          { "bearerAuth": []}
+         ],
+         "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "user id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }],
+        "responses": {
+          "200": {
+            "description": "Company details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                    "name": "IOASYS DESENVOLVIMENTO DE SOFTWARE",
+                    "occupation_area": "Tecnologia",
+                    "description": "Somos especialistas em criar soluções únicas para empresas ousadas. Digitalmente, mas sempre com alma.",
+                    "name_director": "julia Cardoso Pereira",
+                    "founded_in": "2018-10-08T03:00:00.000Z",
+                    "active": false,
+                    "created_at": "2022-03-07T18:44:02.554Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a delete company"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }   
+    },
+    "/company/list": {
+      "get": {
+        "tags": ["Company"],
+        "summary": "Company list",
+        "description": "List Company",
+        "security": [
+          { "bearerAuth": []}
+         ],
+         "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "occupation_area",
+            "in": "query",
+            "description": "ocupation area",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "description",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "founded_in",
+            "in": "query",
+            "description": "foundend in",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "email",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company listed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": [
+                    {
+                      "id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                      "name": "IOASYS DESENVOLVIMENTO DE SOFTWARE",
+                      "occupation_area": "Tecnologia",
+                      "description": "Somos especialistas em criar soluções únicas para empresas ousadas. Digitalmente, mas sempre com alma.",
+                      "name_director": "julia Cardoso Pereira",
+                      "founded_in": "2018-10-08T03:00:00.000Z",
+                      "active": true,
+                      "created_at": "2022-03-07T18:44:02.554Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string[]",
+                  "example": {
+                    "message": "This user does not have permission to perform a list company"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+  "/collaborator": {
+    "post": {
+      "tags": ["Collaborator"],
+      "summary": "Create a collabotator",
+       "description": "Create a new collabotator",
+       "security": [
+        { "bearerAuth": []}
+       ],
+       "requestBody": {
+         "content": {
+           "application/json": {
+             "schema": {
+               "type": "object",
+               "properties": {
+                 "company_id": {
+                   "type": "string"
+                 },
+                 "user_id": {
+                   "type": "string"
+                 },
+                 "type_office_id": {
+                  "type": "string"
+                }
+               },
+               "example": {
+                "company_id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                "user_id": "ed72954f-37b5-463c-8f54-01c31b939bd3",
+                "type_office_id":"e60c3074-441a-4ced-b246-9815b10c07c7"
+               }
+             }
+           }
+         }
+       },
+       "responses": {
+         "201": {
+           "description": "Created",
+           "security": [
+            { "bearerAuth": []}
+           ],
+           "content": {
+            "application/json": {
+              "type": "string[]",
+              "example": {
+                "company_id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                "user_id": "ed72954f-37b5-463c-8f54-01c31b939bd3",
+                "type_office_id": "e60c3074-441a-4ced-b246-9815b10c07c7",
+                "created_at": "2022-03-07T21:38:13.040Z"
+              }
+            }
+           }
+         },
+         "400": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string[]",
+                "example": {
+                  "message": "This user does not have permission to perform a link contributor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "tags": ["Collaborator"],
+      "summary": "Collaborator delete",
+      "description": "Collaborator delete",
+      "security": [
+        { "bearerAuth": []}
+       ],
+       "parameters": [
+        {
+          "name": "company_id",
+          "in": "query",
+          "description": "company id",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "user_id",
+          "in": "query",
+          "description": "user id",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "type_office_id",
+          "in": "query",
+          "description": "type office id",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Company listed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string[]",
+                "example": {
+                  "id": "9913d2e1-6720-483c-8d8d-0af241fe1c1b",
+                  "company_id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                  "user_id": "d40ae759-9ea5-445d-9fad-236479aab8dd",
+                  "type_office_id": "e60c3074-441a-4ced-b246-9815b10c07c7",
+                  "created_at": "2022-03-07T22:31:39.416Z",
+                  "active": false
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string[]",
+                "example": {
+                  "message": "This user does not have permission to perform a link contributor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "get": {
+      "tags": ["Collaborator"],
+      "summary": "Collaborators list",
+      "description": "Collaborators list",
+      "security": [
+        { "bearerAuth": []}
+       ],
+       "parameters": [
+        {
+          "name": "company_id",
+          "in": "query",
+          "description": "company id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+      "responses": {
+        "200": {
+          "description": "User details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string[]",
+                "example": [
+                  {
+                    "id": "d962359b-7dc2-4687-9696-856ff4fa3176",
+                    "company_id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                    "user_id": "ed72954f-37b5-463c-8f54-01c31b939bd3",
+                    "type_office_id": "ac555eb6-8768-467d-9d7f-ccd90b73a1a1",
+                    "created_at": "2022-03-07T19:19:03.729Z",
+                    "active": true,
+                    "user": {
+                      "id": "ed72954f-37b5-463c-8f54-01c31b939bd3",
+                      "full_name": "julia Cardoso Pereira",
+                      "email": "julia@hotmail.com",
+                      "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                      "birth_date": "1996-04-12T03:00:00.000Z",
+                      "uf_residence": "MG",
+                      "city_residence": "Belo Horizonte",
+                      "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                      "active": true
+                    }
+                  },
+                  {
+                    "id": "9913d2e1-6720-483c-8d8d-0af241fe1c1b",
+                    "company_id": "2d424498-62f3-4c5e-9069-47766a12fb37",
+                    "user_id": "d40ae759-9ea5-445d-9fad-236479aab8dd",
+                    "type_office_id": "e60c3074-441a-4ced-b246-9815b10c07c7",
+                    "created_at": "2022-03-07T22:31:39.416Z",
+                    "active": false,
+                    "user": {
+                      "id": "d40ae759-9ea5-445d-9fad-236479aab8dd",
+                      "full_name": "Josefina Cardoso ",
+                      "email": "josefina@hotmail.com",
+                      "type_user_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705d5",
+                      "birth_date": "1996-04-12T03:00:00.000Z",
+                      "uf_residence": "MG",
+                      "city_residence": "Belo Horizonte",
+                      "type_schooling_id": "c1e1a7de-b446-45d2-bb5b-3d067a7705e6",
+                      "active": true
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "400": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string[]",
+                "example": {
+                  "message": "This user does not have permission to perform a list contributor"
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  },
+  "/collaborator/listTypeOffice": {
+    "get": {
+      "tags": ["Collaborator"],
+      "summary": "List a type Office",
+       "description": "List a type Office",
+       "responses": {
+         "200": {
+           "description": "List Office",
+           "content": {
+            "application/json": {
+              "type": "string",
+              "example": [
+                {
+                  "id": "ac555eb6-8768-467d-9d7f-ccd90b73a1a1",
+                  "name": "Diretor"
+                },
+                {
+                  "id": "345ec248-2b0b-405a-b61f-88cc675ee214",
+                  "name": "Gestor"
+                },
+                {
+                  "id": "e60c3074-441a-4ced-b246-9815b10c07c7",
+                  "name": "Empregado"
+                }
+              ]
+            }
+          }
+         }
+      }
+    }
+  }
+  }
 }

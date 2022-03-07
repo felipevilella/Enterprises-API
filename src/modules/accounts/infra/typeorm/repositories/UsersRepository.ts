@@ -65,18 +65,6 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  async findByIdDetails({ id }: IUserDTO): Promise<User> {
-    const user = await getConnection()
-      .getRepository(User)
-      .createQueryBuilder('users')
-      .innerJoinAndSelect('users.typeUsers', 'typeUsers')
-      .leftJoinAndSelect('users.profession', 'profession')
-      .where('users.id = :id', { id })
-      .getOne();
-
-    return user;
-  }
-
   async update(data: IUpdateUserDTO): Promise<User> {
     await getConnection()
       .getRepository(User)
