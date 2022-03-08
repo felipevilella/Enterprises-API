@@ -5,14 +5,14 @@
 <p align="justify"> uma aplicação de gestão de empresas e usuários que são colaboradores dessas empresas, como uma espécie de parte de um ERP - Enterprise Resource Planning. </p>
 
 
-### Usando um task list, marcando tarefa como completada ou não  
+### Topico Completados
 
-- [X] Cadastro de Usuario
-- [X] Editar de Usuario
-- [X] Detalhar de Usuario
-- [X] Listar de Usuario
-- [X] Cadastrar empresa
-- [X] Editar empresa
+- [V] Cadastro de Usuario
+- [V] Editar de Usuario
+- [V] Detalhar de Usuario
+- [V] Listar de Usuario
+- [V] Cadastrar empresa
+- [V] Editar empresa
 - [X] Listar empresa
 - [X] Detalhar empresa
 - [X] Excluir empresa
