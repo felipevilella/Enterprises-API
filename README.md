@@ -54,6 +54,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Celebrate](https://www.npmjs.com/package/celebrate)
 - [Swagger](https://blog.logrocket.com/documenting-your-express-api-with-swagger/)
 - [Jest](https://jestjs.io)
+- [Eslintrc](https://eslint.org/docs/user-guide/configuring/)
+- [Prettier](https://prettier.io)
+- [Docker](https://www.docker.com)
   
   
   
