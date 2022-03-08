@@ -7,7 +7,7 @@
 
 ### Topico Completados
 
-- [X] Cadastro de Usuario
+- [x] Cadastro de Usuario
 - [x] Editar de Usuario
 - [x] Detalhar de Usuario
 - [x] Listar de Usuario
@@ -42,4 +42,19 @@
 ### Comandos úteis
   - `yarn build` Gera um build para a produção
   - `yarn` instalar bibliotecas
+  
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [Express](https://expressjs.com)
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TypeORM](https://www.npmjs.com/package/typeorm)
+- [Celebrate](https://www.npmjs.com/package/celebrate)
+- [Swagger](https://blog.logrocket.com/documenting-your-express-api-with-swagger/)
+- [Jest](https://jestjs.io)
+  
+  
+  
   
