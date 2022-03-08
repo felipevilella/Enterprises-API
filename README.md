@@ -24,7 +24,7 @@
 - [x] Teste Unitarios 
 - [x] PostegreSQL
 - [x] Swagger
-- [x] Bearer <Token> 
+- [x] Bearer-Token 
 
 
 ### Executando o projeto
