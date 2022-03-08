@@ -7,25 +7,25 @@
 
 ### Topico Completados
 
-- [V] Cadastro de Usuario
-- [V] Editar de Usuario
-- [V] Detalhar de Usuario
-- [V] Listar de Usuario
-- [V] Cadastrar empresa
-- [V] Editar empresa
-- [X] Listar empresa
-- [X] Detalhar empresa
-- [X] Excluir empresa
-- [X] Vincular Colaborador
-- [X] Desvincular colaborador
-- [X] Listar Colaboradores
-- [X] Anaiador sintático(inter)
-- [X] Formatador de codigo
-- [X] Teste Unitarios 
-- [X] PostegreSQL
+- [X] Cadastro de Usuario
+- [x] Editar de Usuario
+- [x] Detalhar de Usuario
+- [x] Listar de Usuario
+- [x] Cadastrar empresa
+- [x] Editar empresa
+- [x] Listar empresa
+- [x] Detalhar empresa
+- [x] Excluir empresa
+- [x] Vincular Colaborador
+- [x] Desvincular colaborador
+- [x] Listar Colaboradores
+- [x] Anaiador sintático(inter)
+- [x] Formatador de codigo
+- [x] Teste Unitarios 
+- [x] PostegreSQL
 - [ ] MongoDB 
-- [X] Swagger
-- [X] Bearer <Token> 
+- [x] Swagger
+- [x] Bearer <Token> 
 
 
 ### Executando o projeto
@@ -35,7 +35,7 @@
   1. Execute ```docker-compose up -d``` para iniciar o container do redis. 
   3. A aplicação estará disponível no endereço [http://localhost:3333](http://localhost:3333)
   4. Execute ``yarn test`` para rodar os testes unitarios da aplicação
-  4. Execute ``yarn Migration`` para rodar as migrations
+  4. Execute ``yarn migration`` para rodar as migrations
   6. Documentação em swagger para ter acesso a rota e testar os endpoints com as funções [https://localhost:3333/api-docs/](https://localhost:3333/api-docs/))
   7. Rodar em segundo plano em servidor no modo de produção ```node dist/shared/infra/http/server.js &```
 
