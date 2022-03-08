@@ -23,7 +23,6 @@
 - [x] Formatador de codigo
 - [x] Teste Unitarios 
 - [x] PostegreSQL
-- [ ] MongoDB 
 - [x] Swagger
 - [x] Bearer <Token> 
 
