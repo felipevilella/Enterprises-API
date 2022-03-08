@@ -1,4 +1,32 @@
-# Enterprises-API
+<h1 align="center"> Enterprises-API </h1>
+
+
+## Descrição do Projeto
+<p align="justify"> uma aplicação de gestão de empresas e usuários que são colaboradores dessas empresas, como uma espécie de parte de um ERP - Enterprise Resource Planning. </p>
+
+
+### Usando um task list, marcando tarefa como completada ou não  
+
+- [X] Cadastro de Usuario
+- [X] Editar de Usuario
+- [X] Detalhar de Usuario
+- [X] Listar de Usuario
+- [X] Cadastrar empresa
+- [X] Editar empresa
+- [X] Listar empresa
+- [X] Detalhar empresa
+- [X] Excluir empresa
+- [X] Vincular Colaborador
+- [X] Desvincular colaborador
+- [X] Listar Colaboradores
+- [X] Anaiador sintático(inter)
+- [X] Formatador de codigo
+- [X] Teste Unitarios 
+- [X] PostegreSQL
+- [ ] MongoDB 
+- [X] Swagger
+- [X] Bearer <Token> 
+
 
 ### Executando o projeto
 
